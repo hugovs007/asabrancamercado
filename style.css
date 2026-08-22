@@ -1,0 +1,374 @@
+/* =========================================================
+   Asa Branca Mercado — Biolink
+   Paleta extraída da logomarca:
+   Verde limão #6EFF00 (base #58FF01) · Azul royal #1140E0 (base #0D3EE3)
+   ========================================================= */
+
+:root {
+  --bg: #08210f;
+  --bg-card: #0f2e17;
+  --bg-panel: #123419;
+  --blue: #0134ff;
+  --blue-deep: #0022b8;
+  --lime: #22ff1e;
+  --lime-deep: #16cc12;
+  --white: #f4f7fb;
+  --muted: #a9c2ac;
+  --line: rgba(34, 255, 30, 0.22);
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(0,0,0,0.45);
+  --font-display: "Baloo 2", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background:
+    radial-gradient(65% 45% at 50% 0%, rgba(34, 255, 30, 0.22), transparent 70%),
+    radial-gradient(55% 35% at 100% 100%, rgba(1, 52, 255, 0.18), transparent 70%),
+    var(--bg);
+  min-height: 100vh;
+}
+
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; margin: 0; padding: 0; }
+
+.scene {
+  max-width: 460px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Ticker de ofertas (referência à faixa de preços) ---------- */
+.ticker {
+  background: var(--lime);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 8px 0;
+  border-bottom: 2px solid #05310b;
+}
+.ticker-track {
+  display: inline-flex;
+  animation: scroll-left 18s linear infinite;
+}
+.ticker-track span {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  color: #05230a;
+  padding-right: 8px;
+}
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- Card principal ---------- */
+.card {
+  padding: 28px 20px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Selo / logo em texto, no estilo do logo original azul sobre verde */
+.badge-wrap {
+  position: relative;
+  margin-bottom: 18px;
+}
+.badge-img {
+  width: 152px;
+  height: 152px;
+  border-radius: 50%;
+  display: block;
+  box-shadow: var(--shadow);
+  transform: rotate(-3deg);
+}
+.badge-pin {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: var(--lime);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border: 3px solid var(--bg);
+}
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--lime);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 10px;
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.2;
+  margin: 0 0 10px;
+  color: var(--white);
+}
+
+.sub {
+  font-size: 14.5px;
+  color: var(--muted);
+  max-width: 320px;
+  margin: 0 0 26px;
+}
+.sub strong { color: var(--lime); }
+
+/* ---------- Carrossel do encarte (imagens próprias, sem marca do Canva) ---------- */
+.flyer-carousel {
+  position: relative;
+  width: 100%;
+  padding-top: 141.4286%;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1.5px solid var(--line);
+  background: var(--bg-card);
+  margin-bottom: 24px;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+.flyer-track {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+}
+.flyer-slide {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+.flyer-slide.is-active {
+  opacity: 1;
+}
+.flyer-fullscreen {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(6, 20, 10, 0.55);
+  backdrop-filter: blur(2px);
+  color: var(--white);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+}
+.flyer-fullscreen:active { transform: scale(0.94); }
+.flyer-carousel:fullscreen,
+.flyer-carousel:-webkit-full-screen {
+  padding-top: 0;
+  height: 100%;
+}
+.flyer-carousel:fullscreen .flyer-slide,
+.flyer-carousel:-webkit-full-screen .flyer-slide {
+  object-fit: contain;
+  background: #000;
+}
+
+/* ---------- Links estilo etiqueta de preço ---------- */
+.links {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.link-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 18px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  text-align: left;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.link-btn:active { transform: scale(0.98); }
+
+.link-btn:hover {
+  border-color: var(--lime);
+  background: #0f1a30;
+}
+
+/* recorte de "etiqueta de preço" no lado esquerdo */
+.tag-notch {
+  position: absolute;
+  left: -1.5px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1.5px solid var(--line);
+}
+
+.link-icon {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(34, 255, 30, 0.1);
+  color: var(--lime);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.link-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.link-text strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--white);
+}
+.link-text small {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.link-arrow {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.link-btn--primary {
+  background: linear-gradient(135deg, var(--blue), var(--blue-deep));
+  border-color: var(--blue);
+}
+.link-btn--primary .link-icon {
+  background: rgba(34, 255, 30, 0.22);
+  color: var(--lime);
+}
+.link-btn--primary .link-text small { color: rgba(244,247,251,0.75); }
+.link-btn--primary .link-arrow { color: var(--lime); }
+
+.link-btn--ghost {
+  background: transparent;
+}
+
+/* ---------- Painéis de info (horários / pagamento) ---------- */
+.info-panel {
+  width: 100%;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  text-align: left;
+}
+.info-panel h2 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--lime);
+}
+.info-panel ul { display: flex; flex-direction: column; gap: 8px; }
+.info-panel li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--white);
+  border-bottom: 1px dashed rgba(34, 255, 30, 0.15);
+  padding-bottom: 8px;
+}
+.info-panel li:last-child { border-bottom: none; padding-bottom: 0; }
+.info-panel li span:first-child { color: var(--muted); }
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.chip {
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(34, 255, 30, 0.1);
+  color: var(--lime);
+  border: 1px solid var(--line);
+}
+.fine {
+  font-size: 11.5px;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ---------- Rodapé ---------- */
+.foot {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.foot p { margin: 2px 0; }
+.foot-muted i { color: var(--lime); }
+
+/* ---------- Acessibilidade / preferências ---------- */
+a:focus-visible, .link-btn:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+}
+
+@media (max-width: 360px) {
+  .headline { font-size: 22px; }
+  .badge { width: 128px; height: 128px; }
+}
